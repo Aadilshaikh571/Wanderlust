@@ -1,0 +1,147 @@
+<% layout("/layouts/boilerplate.ejs")  %>
+<style>
+    #filters{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .filter{
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 2rem;
+        opacity: 0.7;
+    }
+    .filter:hover{
+        opacity: 1;
+        cursor:pointer;
+    }
+    .filter p{
+        font-size: 0.9rem;
+    }
+    .tax-info {
+    display: none;
+  }
+  .tax-toggle {
+    border: 1px solid #DDDDDD;
+    border-radius: 1rem;
+    height: 3rem;
+    padding: 0.4rem;
+    margin-left: 70rem;
+    display: flex;
+    align-items: center;
+  }
+</style>
+<div id="filters">
+    <div class="filter">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-city"></i></div>
+      <p>Iconic Cities</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain-sun"></i></div>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain-sun"></i></div>
+        <p>Mountains</p>
+      </div>
+      <div class="filter">
+        <div><i class="fa-brands fa-fort-awesome"></i></div>
+        <p>Castles</p>
+      </div>
+    <div class="filter">
+      <div>
+        <img
+          src="https://a0.muscache.com/pictures/3b1eb541-46d9-4bef-abc4-c37d77e3c21b.jpg"
+          style="width: 21px"
+        />
+      </div>
+      <p>Amazing views</p>
+    </div>
+    <div class="filter">
+      <div>
+        <img
+          src="https://a0.muscache.com/pictures/78ba8486-6ba6-4a43-a56d-f556189193da.jpg"
+          style="width: 21px"
+        />
+      </div>
+      <p>Mansions</p>
+    </div>
+    <div class="filter">
+      <div>
+        <img
+          src="https://a0.muscache.com/pictures/ca25c7f3-0d1f-432b-9efa-b9f5dc6d8770.jpg"
+          style="width: 21px"
+        />
+      </div>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <div>
+        <img
+          src="https://a0.muscache.com/pictures/ee9e2a40-ffac-4db9-9080-b351efc3cfc4.jpg"
+          style="width: 21px"
+        />
+      </div>
+      <p>Tropical</p>
+    </div>
+    <div class="tax-toggle">
+        <div class="form-check-reverse form-switch">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+          />
+          <label class="form-check-label" for="flexSwitchCheckDefault">Display Taxes</label>
+        </div>
+    </div>
+    
+</div>
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+    <%  for(let listing of allListing){ %>
+        <a href="/listings/<%= listing._id%>" class="listing-links">
+    <div class="card col listing-card" >
+        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image"style="height: 20rem;">
+        <div class="card-img-overlay">
+            
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+           <h5> <b><%= listing.title%> </b></h5>
+            <br>
+           &#8377; <%= listing.price.toLocaleString("en-IN")  %> /Night <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+          </p>
+        </div>
+      </div>
+      </a>
+      <% }%>
+    </div>
+
+    <script>
+        const taxSwitch = document.getElementById("flexSwitchCheckDefault");
+        taxSwitch.addEventListener("click", () => {
+          let taxInfo = document.getElementsByClassName("tax-info");
+          for (info of taxInfo) {
+            if (info.style.display != "inline") {
+              info.style.display = "inline";
+            } else {
+              info.style.display = "none";
+            }
+          }
+        });
+      </script>
+    
+</body>
+
